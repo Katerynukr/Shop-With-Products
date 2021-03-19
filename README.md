@@ -1,7 +1,10 @@
 # Shop With Products
+# Description
 This is a console project that imitates a shop where clients can:
 - add products to the shop, 
 - view amount of items and price
+- see and put money on account
+- pay from account
 - buy products
 
 ## The goal of this project
