@@ -19,7 +19,7 @@ namespace ShopWithProducts.Models
 
         public void Greeting()
         {
-            string greeting= "Dear customer, welcome to the shop where you can stock up, buy and view products";
+            string greeting = "Dear customer, welcome to the shop where you can stock up, buy and view products";
             _service.WriteResult(greeting);
         }
 
@@ -40,7 +40,7 @@ namespace ShopWithProducts.Models
             return _service.ReadCommand();
         }
 
-        public string ReadProductName() 
+        public string ReadProductName()
         {
             _service.WriteResult("Enter product name: ");
             return _service.ReadCommand();
@@ -56,10 +56,30 @@ namespace ShopWithProducts.Models
             _service.WriteResult("Enter amount of products: ");
             return _service.ReadCommand();
         }
+
+        public string ReadMoneyAmount()
+        {
+            _service.WriteResult("Enter amount to put on your account: ");
+            return _service.ReadCommand();
+        }
         public void CommandErrorMessage()
         {
             _service.WriteResult("Such command does not exists");
         }
 
+        public void GetBudjet(Customer client)
+        {
+            _service.WriteResult($"Currently on your account: {client.MoneyOnAccoutn}");
+        }
+
+        public void PutOnAccount(Customer client, string amount)
+        {
+            client.PutToBudget(amount);
+        }
+
+        public void Pay(Customer client, int amount)
+        {
+            client.PayFromBudget(amount);
+        }
     }
 }

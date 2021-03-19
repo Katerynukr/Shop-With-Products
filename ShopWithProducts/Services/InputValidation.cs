@@ -46,7 +46,7 @@ namespace ShopWithProducts.Services
                     filteredProducts.Add(product);
                 }
             }
-            if (filteredProducts.Count == amount)
+            if (filteredProducts.Count >= amount)
             {
                 isPossibleToBuy = true;
             }

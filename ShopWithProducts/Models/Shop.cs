@@ -46,14 +46,16 @@ namespace ShopWithProducts.Models
             _service.WriteResult(stockUpMsg);
         }
 
-        public void Buy(string nameString, string priceString, string amountString)
+        public void Buy(string nameString, string priceString, string amountString, Customer client)
         {
             string name = nameString.Trim().ToLower();
             int price = _inputValidation.ConvertPrice(priceString);
             int amount = _inputValidation.ConvertAmount(amountString);
+            int check = amount * price;
             string buyMsg = "";
             bool isPossibleToBuy = _inputValidation.IsPossibleToBuy(ProductsList, name, price, amount);
-            if (isPossibleToBuy)
+            bool isEnoughCredit = this.IsEnoughCredit(client, check);
+            if (isPossibleToBuy && isEnoughCredit)
             {
                 for (int i = 0; i < amount; i++)
                 {
@@ -68,6 +70,7 @@ namespace ShopWithProducts.Models
                 {
                     buyMsg += $"{amount} {name} that cost {price} were bought from the shop";
                 }
+                client.PayFromBudget(check);
             } 
             else
             {
@@ -89,6 +92,15 @@ namespace ShopWithProducts.Models
             }
             
             _service.WriteResult(listMsg);
+        }
+
+       private bool IsEnoughCredit(Customer client, int check)
+        {
+            if(client.MoneyOnAccoutn >= check) 
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

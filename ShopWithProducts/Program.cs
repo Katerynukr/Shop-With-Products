@@ -12,6 +12,7 @@ namespace ShopWithProducts
             ILogger logger = new ConsoleLogger();
             Commands userInteraction = new Commands(logger);
             var shop = new Shop(logger);
+            var user = new Customer(logger);
             userInteraction.Greeting();
             while (true)
             {
@@ -32,8 +33,17 @@ namespace ShopWithProducts
                 {
                     var name = userInteraction.ReadProductName();
                     var price = userInteraction.ReadProductPrice();
-                    var amount = userInteraction.ReadProductAmount();
-                    shop.Buy(name, price, amount);
+                    var amount = userInteraction.ReadProductAmount(); 
+                    shop.Buy(name, price, amount, user);
+                }
+                else if( userInput == "budjet")
+                {
+                    userInteraction.GetBudjet(user);
+                } 
+                else if(userInput == "put")
+                {
+                    var amount = userInteraction.ReadMoneyAmount();
+                    userInteraction.PutOnAccount(user, amount);
                 }
                 else if (userInput == "exit")
                 {
