@@ -1,6 +1,8 @@
 # Shop With Products
+📚 Hi!This is an .NET Console application. 📚 
+
 # Description
-This is a console project that imitates a shop where clients can:
+The project should imitate a shop where clients can:
 - add products to the shop, 
 - view amount of items and price
 - see and put money on account

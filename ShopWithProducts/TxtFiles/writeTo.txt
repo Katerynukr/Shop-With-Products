@@ -1,0 +1,9 @@
+In our shop you can: 
+* Press list - see all amount of available items and find its price 
+* Press add -  order to the shop an item if it is out of stock
+* Press buy - buy products
+* Press budjet - view the amount of money on the account
+* Press put - put money to your account
+* Press exit - leave the program
+* Please ender the command: 
+

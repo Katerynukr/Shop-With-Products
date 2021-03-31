@@ -13,11 +13,13 @@ namespace ShopWithProducts.Models
         public List<Products> ProductsList { get; set; }
         private DisplayMessages _service;
         private InputValidation _inputValidation;
+        private BudjetManager _budjetService;
         public Shop(ILogger logger)
         {
             ProductsList = new List<Products>();
             _service = new DisplayMessages(logger);
             _inputValidation = new InputValidation();
+            _budjetService = new BudjetManager();
         }
 
         public void StockUp(string nameString, string priceString, string amountString)
@@ -54,7 +56,7 @@ namespace ShopWithProducts.Models
             int check = amount * price;
             string buyMsg = "";
             bool isPossibleToBuy = _inputValidation.IsPossibleToBuy(ProductsList, name, price, amount);
-            bool isEnoughCredit = this.IsEnoughCredit(client, check);
+            bool isEnoughCredit = _budjetService.IsEnoughCredit(client, check);
             if (isPossibleToBuy && isEnoughCredit)
             {
                 for (int i = 0; i < amount; i++)
@@ -92,15 +94,6 @@ namespace ShopWithProducts.Models
             }
             
             _service.WriteResult(listMsg);
-        }
-
-       private bool IsEnoughCredit(Customer client, int check)
-        {
-            if(client.MoneyOnAccoutn >= check) 
-            {
-                return true;
-            }
-            return false;
         }
     }
 }
